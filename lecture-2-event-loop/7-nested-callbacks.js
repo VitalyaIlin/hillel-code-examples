@@ -1,3 +1,5 @@
+const { readFile, writeFile } = require("fs");
+
 console.log('Start');
 
 setTimeout(() => {
@@ -17,3 +19,12 @@ process.nextTick(() => {
 });
 
 console.log('End');
+
+1. синхронні задачі 
+2. асинхронні
+
+
+1. nextTick
+2. microtask - Promise
+3. macrotask - setTimeout, setInterval, setImmediate, readFile, writeFile, call to the external api
+

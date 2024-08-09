@@ -4,4 +4,6 @@ setTimeout(() => {
     console.log('Timeout 2');
 }, 0);
 
-console.log('End');
+setTimeout(() => {
+    console.log('End');
+}, 100)

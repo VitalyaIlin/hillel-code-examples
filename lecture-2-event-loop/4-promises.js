@@ -2,6 +2,10 @@ console.log('Start');
 
 setTimeout(() => {
     console.log('setTimeout 1');
+    
+    Promise.resolve().then(() => {
+        console.log('Promise 2');
+    });
 }, 0);
 
 Promise.resolve().then(() => {
@@ -10,6 +14,6 @@ Promise.resolve().then(() => {
 
 setTimeout(() => {
     console.log('setTimeout 2');
-}, 1000);
+}, 0);
 
 console.log('End');

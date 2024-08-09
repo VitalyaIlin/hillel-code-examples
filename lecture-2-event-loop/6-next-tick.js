@@ -1,15 +1,11 @@
 console.log('Start');
 
-process.nextTick(() => {
-    console.log('nextTick 1');
+Promise.resolve().then(() => {
+    console.log('Promise');
 });
 
 process.nextTick(() => {
-    console.log('nextTick 2');
-});
-
-setImmediate(() => {
-    console.log('setImmediate');
+    console.log('nextTick');
 });
 
 console.log('End');
