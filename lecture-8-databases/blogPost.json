@@ -1,0 +1,28 @@
+{
+    "title": "Introduction to MongoDB",
+    "author": "John Doe",
+    "content": "MongoDB is a NoSQL database...",
+    "published_at": "2024-09-06T10:00:00Z",
+    "tags": ["NoSQL", "Database", "MongoDB"],
+    "comments": [
+      {
+        "user": "Alice",
+        "comment": "Great article!",
+        "created_at": "2024-09-06T11:00:00Z",
+        "replies": [
+          {
+            "user": "John",
+            "reply": "Thanks!",
+            "created_at": "2024-09-06T12:00:00Z"
+          }
+        ]
+      },
+      {
+        "user": "Bob",
+        "comment": "Can you explain more about schemas?",
+        "created_at": "2024-09-06T13:00:00Z",
+        "replies": []
+      }
+    ]
+  }
+  

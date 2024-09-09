@@ -1,0 +1,105 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WebSocket Client Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+    #messages {
+      border: 1px solid #ddd;
+      padding: 10px;
+      height: 300px;
+      overflow-y: scroll;
+      margin-bottom: 20px;
+      background-color: #fff;
+    }
+    #messageInput {
+      width: calc(100% - 100px);
+      padding: 10px;
+      font-size: 16px;
+    }
+    #sendButton {
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h1>WebSocket Client Example</h1>
+  <div id="status">Connecting to WebSocket server...</div>
+  <div id="messages"></div>
+  <input type="text" id="messageInput" placeholder="Enter your message here" />
+  <button id="sendButton">Send</button>
+
+  <script>
+    // Create a new WebSocket connection
+    const socket = new WebSocket('ws://localhost:8080');
+
+    const status = document.getElementById('status');
+    const messages = document.getElementById('messages');
+    const messageInput = document.getElementById('messageInput');
+    const sendButton = document.getElementById('sendButton');
+
+    // Connection opened
+    socket.addEventListener('open', function (event) {
+      status.textContent = 'Connected to WebSocket server';
+      status.style.color = 'green';
+    });
+
+    // Listen for messages
+    socket.addEventListener('message', function (event) {
+      const message = document.createElement('div');
+      message.textContent = `Server: ${event.data}`;
+      messages.appendChild(message);
+      messages.scrollTop = messages.scrollHeight;
+    });
+
+    // Handle connection errors
+    socket.addEventListener('error', function (event) {
+      status.textContent = 'WebSocket error encountered';
+      status.style.color = 'red';
+    });
+
+    // Handle connection close
+    socket.addEventListener('close', function (event) {
+      status.textContent = 'Disconnected from WebSocket server';
+      status.style.color = 'orange';
+    });
+
+    // Send message to server
+    sendButton.addEventListener('click', function () {
+      const message = messageInput.value;
+      if (message) {
+        socket.send(message);
+
+        const messageElement = document.createElement('div');
+        messageElement.textContent = `You: ${message}`;
+        messageElement.style.fontWeight = 'bold';
+        messages.appendChild(messageElement);
+        messages.scrollTop = messages.scrollHeight;
+
+        messageInput.value = '';
+      }
+    });
+
+    // Send message on Enter key press
+    messageInput.addEventListener('keypress', function (event) {
+      if (event.key === 'Enter') {
+        sendButton.click();
+      }
+    });
+  </script>
+</body>
+</html>
